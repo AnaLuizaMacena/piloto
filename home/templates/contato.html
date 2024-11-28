@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{%block title%} Contato {%endblock%}
+
+{%block card%}     {%endblock%}
+
+{% block titulo %} Contato {% endblock %}
+
+{% block conteudo %}
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }} <!-- Renderiza cada campo do formulário com <p> tags -->
+        <button type="submit" class="btn btn-primary">Enviar</button>
+    </form>
+
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{%block title%} Produtos {%endblock%}
+
+{%block card%}     {%endblock%}
+
+{% block titulo %} Lista de Produtos {% endblock %}
+
+{% block conteudo %}
+    <button class="btn btn-primary" onclick="location.href='{% url 'form_produto' %}'"> Novo Produto </button>
+
+    <br><br>
+
+   <table class="table table-bordered table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Código</th>
+                <th scope="col">Descrição</th>
+                <th scope="col">Estoque</th>
+                <th scope="col">Valor (R$)</th>
+                <th scope="col">Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in lista %}
+            <tr>
+                <td> {{item.id}}</td>
+                <td> {{item.nome}}</td>
+                <td> {{item.quantidade}}</td>
+                <td> {{item.preco}}</td>
+                <td> 
+                    <button class="btn btn-info" onclick="location.href='{% url 'detalhes_produto' item.id %}'"> Detalhes </button>
+                    <button class="btn btn-warning" onclick="location.href='{% url 'editar_produto' item.id %}'"> Alterar </button>
+                    <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#janela" > Excluir </button>
+
+                    
+                    <div class="modal" id="janela">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header justify-content-center">
+                                    <h6 class="modal-title"> Tem certeza que deseja excluir esse produto? </h6>
+                                </div>
+                                <div class="row justify-content-center">
+                                    <button onclick="location.href='{% url 'excluir_produto' item.id %}'" class="btn btn-primary" > Sim </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        
+        </tbody>
+    </table>
+
+{% endblock %}
